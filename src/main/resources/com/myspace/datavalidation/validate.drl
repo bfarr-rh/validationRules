@@ -1,0 +1,41 @@
+package com.myspace.datavalidation;
+
+rule "Name Format Error"
+	dialect "mvel"
+
+	when
+		Person( name not matches "([A-Z][a-z\\-]+\\s)+\\s*[A-Z][a-z]+$" )
+	then
+		ValidationError fact = new ValidationError();
+		fact.setCause( "Name format error." );
+		insert( fact );
+		System.out.println("Executed Rule: " + drools.getRule().getName() );
+end
+
+rule "Name Too Long"
+	dialect "mvel"
+
+	when
+		Person( name.length() > 40)
+	then
+		ValidationError fact = new ValidationError();
+		fact.setCause( "Name too long." );
+		insert( fact );
+		System.out.println("Executed Rule: " + drools.getRule().getName() );
+end
+
+
+rule "Retract Person after Validation"
+	dialect "mvel"
+
+	salience -10
+	when
+		fact : Person( )
+	then
+		retract(fact);
+		System.out.println("Executed Rule: " + drools.getRule().getName() );
+end
+
+query "get_validation_error"
+    $error : ValidationError()
+end
