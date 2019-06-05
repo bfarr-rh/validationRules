@@ -24,7 +24,7 @@ rule "Name Too Long"
 		System.out.println("Executed Rule: " + drools.getRule().getName() );
 end
 
-
+/*
 rule "Retract Person after Validation"
 	dialect "mvel"
 
@@ -35,6 +35,7 @@ rule "Retract Person after Validation"
 		retract(fact);
 		System.out.println("Executed Rule: " + drools.getRule().getName() );
 end
+*/
 
 query "get_validation_error"
     $error : ValidationError()
