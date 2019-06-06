@@ -4,14 +4,27 @@ import com.redhat.demo.blacklistclient.Client;
 
 global Client service;
 
+
 rule "Name Format Error"
 	dialect "mvel"
 
 	when
-		Person( name not matches "([A-Z][a-z\\-]+\\s)+\\s*[A-Z][a-z]+$" )
+		Person( name not matches "(([A-Z][a-z]+(-[A-Z][a-z]+)*)\\s+)+([A-Z][a-z]+(-[A-Z][a-z]+)*)$" )
 	then
 		ValidationError fact = new ValidationError();
 		fact.setCause( "Name format error." );
+		insert( fact );
+		System.out.println("Executed Rule: " + drools.getRule().getName() );
+end
+
+rule "Name Capitalisation Error"
+	dialect "mvel"
+
+	when
+		Person( name matches "-[a-z]" )
+	then
+		ValidationError fact = new ValidationError();
+		fact.setCause( "Name Capitalisation Error." );
 		insert( fact );
 		System.out.println("Executed Rule: " + drools.getRule().getName() );
 end
@@ -38,7 +51,7 @@ rule "Name In Blacklist"
 	then
 	    if (service.checkIfOnBlacklist($person.name).equals("yes")) {
 		    ValidationError fact = new ValidationError();
-		    fact.setCause( "Name In Blacklist." );
+		    fact.setCause( "Name In Blacklist" );
 		    insert( fact );
 	    }
 		System.out.println("Executed Rule: " + drools.getRule().getName() );
