@@ -4,7 +4,7 @@ import com.redhat.demo.blacklistclient.Client;
 
 global Client service;
 
-
+/*
 rule "Name Format Error"
 	dialect "mvel"
 
@@ -56,7 +56,7 @@ rule "Name In Blacklist"
 	    }
 		System.out.println("Executed Rule: " + drools.getRule().getName() );
 end
-
+*/
 /*
 rule "Retract Person after Validation"
 	dialect "mvel"
