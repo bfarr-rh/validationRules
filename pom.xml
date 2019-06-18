@@ -3,10 +3,10 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.myspace</groupId>
-  <artifactId>dataValidation</artifactId>
+  <artifactId>validationRules</artifactId>
   <version>1.0.0-SNAPSHOT</version>
   <packaging>kjar</packaging>
-  <name>dataValidation</name>
+  <name>validationRules</name>
   <description></description>
   <dependencies>
     <dependency>
@@ -83,7 +83,7 @@
     </dependency>
     <dependency>
       <groupId>com.redhat.demo</groupId>
-      <artifactId>blacklist-client</artifactId>
+      <artifactId>abn-client</artifactId>
       <version>1.8.3</version>
     </dependency>
   </dependencies>
